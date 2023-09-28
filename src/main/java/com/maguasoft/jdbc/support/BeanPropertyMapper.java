@@ -19,6 +19,10 @@ public class BeanPropertyMapper<T> implements RowMapper<T> {
     private TypeConverter typeConverter = new DefaultTypeConverter();
 
     public BeanPropertyMapper(Class<T> clazz) {
+        if (Objects.isNull(clazz)) {
+            throw new IllegalArgumentException("Arguments <clazz> Cannot be null.");
+        }
+
         this.clazz = clazz;
     }
 
@@ -28,10 +32,6 @@ public class BeanPropertyMapper<T> implements RowMapper<T> {
             throw new IllegalArgumentException("Arguments <resultSet> Cannot be null.");
         }
 
-        if (Objects.isNull(clazz)) {
-            throw new IllegalArgumentException("Arguments <clazz> Cannot be null.");
-        }
-
         try {
             // Instance <T> Object
             T entity = clazz.getConstructor().newInstance();
@@ -39,6 +39,7 @@ public class BeanPropertyMapper<T> implements RowMapper<T> {
 
             ResultSetMetaData metaData = resultSet.getMetaData();
             int columnCount = metaData.getColumnCount();
+
             for (int column = 1; column <= columnCount; column++) {
                 String columnName = metaData.getColumnName(column);
                 Method method = methods.get(NameGenerator.getSetterMethodName(columnName));

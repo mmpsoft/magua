@@ -10,6 +10,14 @@ public interface SupportDao {
      * Execute normal SQL
      *
      * @param sql
+     * @return
+     */
+    int executeSql(String sql);
+
+    /**
+     * Execute normal SQL
+     *
+     * @param sql
      * @param args
      * @param <T>
      * @return

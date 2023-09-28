@@ -24,7 +24,7 @@ public class Strings {
     }
 
     public static boolean contains(String value, String regex) {
-        return isNotBlank(value) && Arrays.stream(regex.split(OR_REGEX)).anyMatch(value::contains);
+        return containsAll(value, regex.split(OR_REGEX));
     }
 
     public static boolean containsAll(String value, String... regex) {

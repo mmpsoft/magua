@@ -6,7 +6,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SupportDaoImplTest {
 
@@ -14,9 +17,8 @@ public class SupportDaoImplTest {
 
     @Before
     public void before() {
-        SupportDao supportDao = new SupportDaoImpl();
-        supportDao.executeSql("drop table if exists `user`", Collections.emptyMap());
-        supportDao.executeSql("create table `user` (id int, name varchar(20), nick_name varchar(20))", Collections.emptyMap());
+        supportDao.executeSql("drop table if exists `user`");
+        supportDao.executeSql("create table `user` (id int, name varchar(20), nick_name varchar(20))");
 
         for (int index = 1; index <= 3; index++) {
             Map<Integer, Object> args = new HashMap<>();
@@ -29,56 +31,57 @@ public class SupportDaoImplTest {
     }
 
     @Test
-    public void testBuildSql() {
-        System.out.println("insert into `user` values (?, ?, ?)".replaceFirst("\\?", "zhangsan"));
-    }
-
-    @Test
-    public void testExecuteSql() {
-        List<User> list = supportDao.executeSql("select * from `user`;", null, User.class);
-        Assert.assertNotNull(list);
-        Assert.assertEquals(list.size(), 3);
-        System.out.println(Arrays.toString(list.toArray(new User[]{})));
-
-        Map<Integer, Object> argsOfInsert = new HashMap<>();
-        argsOfInsert.put(1, 11);
-        argsOfInsert.put(2, "lisi");
-        argsOfInsert.put(3, "狗剩");
-        Integer insert = supportDao.executeSql("insert into `user` values (?, ?, ?);", argsOfInsert);
-        System.out.printf("insert -> %s \n", insert);
-        Assert.assertTrue(insert > 0);
-
-        Map<Integer, Object> argsOfUpdate = new HashMap<>();
-        argsOfUpdate.put(1, "王五");
-        argsOfUpdate.put(2, "狗蛋");
-        argsOfUpdate.put(3, 11);
-        Integer update = supportDao.executeSql("update `user` set name = ?, nick_name = ? where id = ?;", argsOfUpdate);
-        System.out.printf("update -> %s \n", update);
-        Assert.assertTrue(update > 0);
-
-        Map<Integer, Object> argsOfQuery = new HashMap<>();
-        argsOfQuery.put(1, 11);
-
-        List<User> select = supportDao.executeSql("select * from `user` where id = ?;", argsOfQuery, new BeanPropertyMapper<>(User.class));
-        Assert.assertNotNull(select);
-        Assert.assertEquals(select.size(), 1);
-        System.out.println(Arrays.toString(select.toArray(new User[]{})));
-
-        Map<Integer, Object> argsOfDelete = new HashMap<>();
-        argsOfDelete.put(1, 11);
-        Integer delete = supportDao.executeSql("delete from `user` where id = ?;", argsOfDelete);
-        System.out.printf("delete -> %s \n", delete);
-        Assert.assertTrue(delete > 0);
-    }
-
-    @Test
-    public void testExecuteSqlOfNonMapper() {
+    public void testQuerySql() {
         Map<Integer, Object> queryArgs = new HashMap<>();
         queryArgs.put(1, 1);
 
-        List<User> select = supportDao.executeSql("select * from `user` where id = ?;", queryArgs);
-        Assert.assertNotNull(select);
-        Assert.assertEquals(select.size(), 1);
-        System.out.println(Arrays.toString(select.toArray(new User[]{})));
+        List<User> list1 = supportDao.executeSql("select * from `user` where id = ?;", queryArgs);
+        Assert.assertNotNull(list1);
+        Assert.assertEquals(list1.size(), 1);
+        System.out.println(Arrays.toString(list1.toArray(new User[]{})));
+
+        List<User> list2 = supportDao.executeSql("select * from `user`;", null, User.class);
+        Assert.assertNotNull(list2);
+        Assert.assertEquals(list2.size(), 3);
+        System.out.println(Arrays.toString(list2.toArray(new User[]{})));
+
+        Map<Integer, Object> argsOfQuery = new HashMap<>();
+        argsOfQuery.put(1, 1);
+
+        List<User> list3 = supportDao.executeSql("select * from `user` where id = ?;", argsOfQuery, new BeanPropertyMapper<>(User.class));
+        Assert.assertNotNull(list3);
+        Assert.assertEquals(list3.size(), 1);
+        System.out.println(Arrays.toString(list3.toArray(new User[]{})));
+    }
+
+    @Test
+    public void testUpdateSql() {
+        Map<Integer, Object> argsOfUpdate = new HashMap<>();
+        argsOfUpdate.put(1, "王五");
+        argsOfUpdate.put(2, "狗蛋");
+        argsOfUpdate.put(3, 1);
+        Integer update = supportDao.executeSql("update `user` set name = ?, nick_name = ? where id = ?;", argsOfUpdate);
+        System.out.printf("update -> %s \n", update);
+        Assert.assertTrue(update > 0);
+    }
+
+    @Test
+    public void testInsertSql() {
+        Map<Integer, Object> args = new HashMap<>();
+        args.put(1, 11);
+        args.put(2, "lisi");
+        args.put(3, "狗剩");
+        Integer insert = supportDao.executeSql("insert into `user` values (?, ?, ?);", args);
+        System.out.printf("insert -> %s \n", insert);
+        Assert.assertTrue(insert > 0);
+    }
+
+    @Test
+    public void testDeleteSql() {
+        Map<Integer, Object> args = new HashMap<>();
+        args.put(1, 1);
+        Integer delete = supportDao.executeSql("delete from `user` where id = ?;", args);
+        System.out.printf("delete -> %s \n", delete);
+        Assert.assertTrue(delete > 0);
     }
 }

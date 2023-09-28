@@ -15,6 +15,11 @@ import java.util.*;
 public class SupportDaoImpl implements SupportDao {
 
     @Override
+    public int executeSql(String sql) {
+        return executeSql(sql, null);
+    }
+
+    @Override
     public <T> T executeSql(String sql, Map<Integer, Object> args) {
         return executeSql(sql, args, RowMapper.DEFAULT_MAPPER);
     }
