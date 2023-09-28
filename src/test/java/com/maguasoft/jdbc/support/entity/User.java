@@ -1,6 +1,6 @@
-package com.maguasoft.jdbc.support;
+package com.maguasoft.jdbc.support.entity;
 
-public class Entity {
+public class User {
 
     private Integer id;
     private String name;
@@ -33,7 +33,8 @@ public class Entity {
     @Override
     public String toString() {
         return "Entity{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", nickName='" + nickName + '\'' +
                 '}';
     }

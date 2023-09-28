@@ -21,30 +21,19 @@ public interface SupportDao {
      *
      * @param sql
      * @param args
+     * @param <T>
+     * @return
+     */
+    <T> T executeSql(String sql, Map<Integer, Object> args, Class<?> clazz);
+
+    /**
+     * Execute normal SQL
+     *
+     * @param sql
+     * @param args
      * @param rowMapper
      * @param <T>
      * @return
      */
     <T> T executeSql(String sql, Map<Integer, Object> args, RowMapper<?> rowMapper);
-
-    /**
-     * Execute produce call
-     *
-     * @param sql
-     * @param args
-     * @param <T>
-     * @return
-     */
-    <T> T executeCall(String sql, Map<Integer, Object> args);
-
-    /**
-     * Execute produce call
-     *
-     * @param sql
-     * @param args
-     * @param rowMapper
-     * @param <T>
-     * @return
-     */
-    <T> T executeCall(String sql, Map<Integer, Object> args, RowMapper<?> rowMapper);
 }

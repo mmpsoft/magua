@@ -18,6 +18,11 @@ public class DefaultDialect implements Dialect {
     }
 
     @Override
+    public Connection getConnection(ConfigProps beanProps) throws SQLException {
+        return getConnection(beanProps.getUri(), beanProps.getName(), beanProps.getPassword());
+    }
+
+    @Override
     public Connection getConnection(String uri, String name, String password) throws SQLException {
         Properties args = new Properties();
         args.put(DATABASE_URI, uri);
