@@ -1,11 +1,12 @@
 package com.maguasoft.jdbc;
 
 import com.maguasoft.jdbc.support.BeanPropertyMapper;
-import com.maguasoft.utils.Props;
 import com.maguasoft.utils.NameGenerator;
+import com.maguasoft.utils.Props;
 import com.maguasoft.utils.Strings;
 
 import java.sql.ResultSet;
+import java.util.Objects;
 
 public interface RowMapper<T> {
 
@@ -18,18 +19,16 @@ public interface RowMapper<T> {
      * @param resultSet
      * @return
      */
-    RowMapper<?> DEFAULT_MAPPER = resultSet -> {
-        try {
-            String className = NameGenerator.capitalize(resultSet.getMetaData().getTableName(1));
-            String entityPackage = Props.getPropsValueBy(Dialect.DEFAULT_PATH, Dialect.DATABASE_ENTITY_PACKAGE);
-            if (Strings.isBlank(className) || Strings.isBlank(entityPackage)) {
-                throw new RuntimeException("entityPackage cannot be empty.");
+    RowMapper<?> DEFAULT_MAPPER = new RowMapper<Object>() {
+        RowMapper<?> beanMapper;
+
+        @Override
+        public Object mapRow(ResultSet resultSet) throws Exception {
+            if (Objects.isNull(beanMapper)) {
+                this.beanMapper = getDefaultMapper(resultSet);
             }
 
-            String ref = String.format("%s.%s", entityPackage, className);
-            return new BeanPropertyMapper<>(Class.forName(ref));
-        } catch (Exception e) {
-            throw new RuntimeException("Generate Row Mapper error. Cause by: ", e);
+            return this.beanMapper.mapRow(resultSet);
         }
     };
 
@@ -40,4 +39,22 @@ public interface RowMapper<T> {
      * @return
      */
     T mapRow(ResultSet resultSet) throws Exception;
+
+    /**
+     * 默认的row mapper
+     *
+     * @param resultSet
+     * @return
+     * @throws Exception
+     */
+    default RowMapper<?> getDefaultMapper(ResultSet resultSet) throws Exception {
+        String className = NameGenerator.capitalize(resultSet.getMetaData().getTableName(1));
+        String entityPackage = Props.getPropsValueBy(Dialect.DEFAULT_PATH, Dialect.DATABASE_ENTITY_PACKAGE);
+        if (Strings.isBlank(className) || Strings.isBlank(entityPackage)) {
+            throw new RuntimeException("entityPackage cannot be empty.");
+        }
+
+        String ref = String.format("%s.%s", entityPackage, className);
+        return new BeanPropertyMapper<>(Class.forName(ref));
+    }
 }

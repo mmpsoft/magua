@@ -1,7 +1,6 @@
-package com.maguasoft.jdbc.support.entity;
+package com.maguasoft.jdbc.support;
 
 import com.maguasoft.jdbc.Dialect;
-import com.maguasoft.jdbc.support.ConfigProps;
 import com.maguasoft.utils.Props;
 import org.junit.Assert;
 import org.junit.Test;
