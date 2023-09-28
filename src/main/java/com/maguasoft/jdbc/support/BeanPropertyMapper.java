@@ -1,16 +1,13 @@
 package com.maguasoft.jdbc.support;
 
-
 import com.maguasoft.jdbc.RowMapper;
 import com.maguasoft.jdbc.TypeConverter;
 import com.maguasoft.utils.NameGenerator;
 import com.maguasoft.utils.Reflects;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import java.util.Map;
 import java.util.Objects;
 
@@ -56,8 +53,7 @@ public class BeanPropertyMapper<T> implements RowMapper<T> {
             }
 
             return entity;
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                 NoSuchMethodException | SQLException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
