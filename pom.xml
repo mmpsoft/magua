@@ -15,7 +15,7 @@
     <module>magua-mvc</module>
     <module>magua-aop</module>
     <module>magua-orm</module>
-    <module>magua-utils</module>
+    <module>magua-commons</module>
   </modules>
 
   <properties>

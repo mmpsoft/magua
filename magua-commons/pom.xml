@@ -8,10 +8,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>magua-utils</artifactId>
+    <artifactId>magua-commons</artifactId>
     <packaging>jar</packaging>
 
-    <name>rookie-utils</name>
+    <name>magua-commons</name>
     <url>http://maven.apache.org</url>
 
     <properties>

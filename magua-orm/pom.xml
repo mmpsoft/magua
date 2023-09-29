@@ -21,7 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>com.maguasoft</groupId>
-            <artifactId>rookie-utils</artifactId>
+            <artifactId>magua-commons</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <!--SLF4J -->
