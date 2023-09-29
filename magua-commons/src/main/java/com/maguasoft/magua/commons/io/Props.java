@@ -1,5 +1,7 @@
-package com.maguasoft.magua.utils;
+package com.maguasoft.magua.commons.io;
 
+import com.maguasoft.magua.commons.reflect.Reflects;
+import com.maguasoft.magua.commons.text.NameGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

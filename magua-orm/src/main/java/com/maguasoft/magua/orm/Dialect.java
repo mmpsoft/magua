@@ -1,7 +1,7 @@
 package com.maguasoft.magua.orm;
 
 import com.maguasoft.magua.orm.support.ConfigProps;
-import com.maguasoft.magua.utils.Props;
+import com.maguasoft.magua.commons.io.Props;
 
 import java.sql.Connection;
 import java.sql.SQLException;

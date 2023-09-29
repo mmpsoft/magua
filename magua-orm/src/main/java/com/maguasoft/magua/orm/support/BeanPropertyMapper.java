@@ -2,8 +2,8 @@ package com.maguasoft.magua.orm.support;
 
 import com.maguasoft.magua.orm.RowMapper;
 import com.maguasoft.magua.orm.TypeConverter;
-import com.maguasoft.magua.utils.NameGenerator;
-import com.maguasoft.magua.utils.Reflects;
+import com.maguasoft.magua.commons.text.NameGenerator;
+import com.maguasoft.magua.commons.reflect.Reflects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

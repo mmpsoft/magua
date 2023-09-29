@@ -1,4 +1,4 @@
-package com.maguasoft.magua.utils.bean;
+package com.maguasoft.magua.commons.utils.bean;
 
 public class TestBean {
     private String uri;

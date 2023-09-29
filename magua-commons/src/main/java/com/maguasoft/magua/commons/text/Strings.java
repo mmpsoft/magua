@@ -1,4 +1,4 @@
-package com.maguasoft.magua.utils;
+package com.maguasoft.magua.commons.text;
 
 import java.util.Arrays;
 import java.util.Objects;

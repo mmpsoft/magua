@@ -3,8 +3,8 @@ package com.maguasoft.magua.orm.support;
 import com.maguasoft.magua.orm.Dialect;
 import com.maguasoft.magua.orm.RowMapper;
 import com.maguasoft.magua.orm.SupportDao;
-import com.maguasoft.magua.utils.Props;
-import com.maguasoft.magua.utils.Strings;
+import com.maguasoft.magua.commons.io.Props;
+import com.maguasoft.magua.commons.text.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

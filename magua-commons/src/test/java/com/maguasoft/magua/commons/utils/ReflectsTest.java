@@ -1,6 +1,8 @@
-package com.maguasoft.magua.utils;
+package com.maguasoft.magua.commons.utils;
 
-import com.maguasoft.magua.utils.bean.UserBean;
+import com.maguasoft.magua.commons.reflect.Reflects;
+import com.maguasoft.magua.commons.text.Strings;
+import com.maguasoft.magua.commons.utils.bean.UserBean;
 import org.junit.Assert;
 import org.junit.Test;
 

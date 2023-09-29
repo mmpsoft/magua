@@ -1,9 +1,9 @@
 package com.maguasoft.magua.orm;
 
 import com.maguasoft.magua.orm.support.BeanPropertyMapper;
-import com.maguasoft.magua.utils.NameGenerator;
-import com.maguasoft.magua.utils.Props;
-import com.maguasoft.magua.utils.Strings;
+import com.maguasoft.magua.commons.text.NameGenerator;
+import com.maguasoft.magua.commons.io.Props;
+import com.maguasoft.magua.commons.text.Strings;
 
 import java.sql.ResultSet;
 import java.util.Objects;

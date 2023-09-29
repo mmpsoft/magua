@@ -1,5 +1,8 @@
-package com.maguasoft.magua.utils;
+package com.maguasoft.magua.commons.utils;
 
+import com.maguasoft.magua.commons.reflect.Reflects;
+import com.maguasoft.magua.commons.text.NameGenerator;
+import com.maguasoft.magua.commons.text.Strings;
 import org.junit.Assert;
 import org.junit.Test;
 

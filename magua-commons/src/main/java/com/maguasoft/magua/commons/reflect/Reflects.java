@@ -1,4 +1,6 @@
-package com.maguasoft.magua.utils;
+package com.maguasoft.magua.commons.reflect;
+
+import com.maguasoft.magua.commons.text.Strings;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;

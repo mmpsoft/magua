@@ -1,4 +1,6 @@
-package com.maguasoft.magua.utils;
+package com.maguasoft.magua.commons.text;
+
+import com.maguasoft.magua.commons.reflect.Reflects;
 
 import java.util.Arrays;
 import java.util.function.Function;
