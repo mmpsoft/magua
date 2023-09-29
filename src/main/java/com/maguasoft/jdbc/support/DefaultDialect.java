@@ -12,7 +12,7 @@ public class DefaultDialect implements Dialect {
 
     @Override
     public Connection getConnection(Properties args) throws SQLException {
-        return DriverManager.getConnection(Objects.toString(args.get(DATABASE_URI)).trim(),
+        return getConnection(Objects.toString(args.get(DATABASE_URI)).trim(),
                 Objects.toString(args.get(DATABASE_NAME)).trim(),
                 Objects.toString(args.get(DATABASE_PASSWORD)).trim());
     }
@@ -24,10 +24,6 @@ public class DefaultDialect implements Dialect {
 
     @Override
     public Connection getConnection(String uri, String name, String password) throws SQLException {
-        Properties args = new Properties();
-        args.put(DATABASE_URI, uri);
-        args.put(DATABASE_NAME, name);
-        args.put(DATABASE_PASSWORD, password);
-        return getConnection(args);
+        return DriverManager.getConnection(uri, name, password);
     }
 }

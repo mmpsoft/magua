@@ -46,10 +46,9 @@ public class BeanPropertyMapper<T> implements RowMapper<T> {
                 if (Objects.nonNull(method)) {
                     method.setAccessible(true);
                     // TODO data type converter
-                    // typeConverter.convert(resultSet.getObject(column));
-
+                    Object value = typeConverter.convert(resultSet.getObject(column));
                     // Invoke setter method
-                    method.invoke(entity, resultSet.getObject(column));
+                    method.invoke(entity, value);
                 }
             }
 
