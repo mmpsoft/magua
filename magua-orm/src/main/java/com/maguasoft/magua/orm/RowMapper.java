@@ -46,7 +46,7 @@ public interface RowMapper<T> {
      */
     default RowMapper<?> getDefaultMapper(ResultSet resultSet) throws Exception {
         String className = NameGenerator.capitalize(resultSet.getMetaData().getTableName(1));
-        String entityPackage = Props.getPropsValueBy(Dialect.DEFAULT_PATH, Dialect.DATABASE_ENTITY_PACKAGE);
+        String entityPackage = Props.getPropsValueBy(Dialect.DEFAULT_DATABASE_CONF, Dialect.DATABASE_ENTITY_PACKAGE);
         if (Strings.isBlank(className) || Strings.isBlank(entityPackage)) {
             throw new RuntimeException("entityPackage cannot be empty.");
         }

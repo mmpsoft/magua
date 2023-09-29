@@ -84,7 +84,7 @@ public class SupportDaoImpl implements SupportDao {
     }
 
     private Dialect getDialect() throws SQLException {
-        String dialectClazz = Props.getPropsValueBy(Dialect.DEFAULT_PATH, Dialect.DATABASE_DIALECT);
+        String dialectClazz = Props.getPropsValueBy(Dialect.DEFAULT_DATABASE_CONF, Dialect.DATABASE_DIALECT);
         if (Objects.isNull(dialectClazz)) {
             throw new SQLException("Initial dialect error, Cause by: Attribute <database.dialect> value is null on database.properties");
         }

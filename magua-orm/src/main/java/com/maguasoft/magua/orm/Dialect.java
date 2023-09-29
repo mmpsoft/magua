@@ -9,13 +9,14 @@ import java.util.Properties;
 
 public interface Dialect {
 
-    String PREFIX = "database";
-    String DATABASE_URI = String.format("%s.%s", PREFIX, "uri");
-    String DATABASE_NAME = String.format("%s.%s", PREFIX, "name");
-    String DATABASE_PASSWORD = String.format("%s.%s", PREFIX, "password");
-    String DATABASE_DIALECT = String.format("%s.%s", PREFIX, "dialect");
-    String DATABASE_ENTITY_PACKAGE = String.format("%s.%s", PREFIX, "entity-package");
-    String DEFAULT_PATH = "./database.properties";
+    String DATABASE_CONF_PREFIX = "database";
+    String DEFAULT_DATABASE_CONF = "./database.properties";
+
+    String DATABASE_URI = String.format("%s.uri", DATABASE_CONF_PREFIX);
+    String DATABASE_NAME = String.format("%s.name", DATABASE_CONF_PREFIX);
+    String DATABASE_PASSWORD = String.format("%s.password", DATABASE_CONF_PREFIX);
+    String DATABASE_DIALECT = String.format("%s.dialect", DATABASE_CONF_PREFIX);
+    String DATABASE_ENTITY_PACKAGE = String.format("%s.entity-package", DATABASE_CONF_PREFIX);
 
     /**
      * 获取数据库连接
@@ -48,6 +49,6 @@ public interface Dialect {
      * @return
      */
     default Connection getConnection() throws SQLException {
-        return getConnection(Props.getBeanProps(DEFAULT_PATH, ConfigProps.class, PREFIX));
+        return getConnection(Props.getBeanProps(DEFAULT_DATABASE_CONF, ConfigProps.class, DATABASE_CONF_PREFIX));
     }
 }
