@@ -3,19 +3,19 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.maguasoft</groupId>
-  <artifactId>rookie</artifactId>
+  <artifactId>magua</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>rookie</name>
+  <name>magua</name>
 
   <url>http://maven.apache.org</url>
 
   <modules>
-    <module>rookie-ioc</module>
-    <module>rookie-mvc</module>
-    <module>rookie-aop</module>
-    <module>rookie-orm</module>
-    <module>rookie-utils</module>
+    <module>magua-ioc</module>
+    <module>magua-mvc</module>
+    <module>magua-aop</module>
+    <module>magua-orm</module>
+    <module>magua-utils</module>
   </modules>
 
   <properties>
