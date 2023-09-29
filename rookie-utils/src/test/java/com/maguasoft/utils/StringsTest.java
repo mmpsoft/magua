@@ -3,7 +3,7 @@ package com.maguasoft.utils;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class StringsTestBean {
+public class StringsTest {
 
     @Test
     public void testIsEmpty() {

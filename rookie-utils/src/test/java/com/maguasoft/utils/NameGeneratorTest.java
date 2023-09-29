@@ -3,7 +3,7 @@ package com.maguasoft.utils;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class NameGeneratorTestBean {
+public class NameGeneratorTest {
 
     @Test
     public void testCapitalize() {

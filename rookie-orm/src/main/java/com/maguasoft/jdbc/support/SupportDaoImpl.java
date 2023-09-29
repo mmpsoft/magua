@@ -5,6 +5,8 @@ import com.maguasoft.jdbc.RowMapper;
 import com.maguasoft.jdbc.SupportDao;
 import com.maguasoft.utils.Props;
 import com.maguasoft.utils.Strings;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +15,8 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class SupportDaoImpl implements SupportDao {
+
+    public static final Logger log = LoggerFactory.getLogger(SupportDaoImpl.class);
 
     @Override
     public int executeSql(String sql) {
@@ -41,7 +45,7 @@ public class SupportDaoImpl implements SupportDao {
             // 设置参数
             wrapSqlArguments(preparedStatement, args);
 
-            System.out.printf("Execute SQL: %s \n", getWrapSql(sql.toUpperCase(), args));
+            log.info("Execute SQL -> {}", getWrapSql(sql.toUpperCase(), args));
 
             // update/delete/insert/create/drop
             if (!isSelect(sql)) {
@@ -82,11 +86,13 @@ public class SupportDaoImpl implements SupportDao {
     private Dialect getDialect() throws SQLException {
         String dialectClazz = Props.getPropsValueBy(Dialect.DEFAULT_PATH, Dialect.DATABASE_DIALECT);
         if (Objects.isNull(dialectClazz)) {
-            throw new SQLException("Initial dialect error, Cause by: Attribute <database.dialect> value is null on database.properties ");
+            throw new SQLException("Initial dialect error, Cause by: Attribute <database.dialect> value is null on database.properties");
         }
 
         try {
             Class<?> clazz = Class.forName(dialectClazz);
+            log.info("Use {} dialect connected", clazz);
+
             return (Dialect) clazz.newInstance();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
@@ -109,5 +115,4 @@ public class SupportDaoImpl implements SupportDao {
                     return Objects.toString(result).replaceFirst(SQL_PLACEHOLDER, wrapValue);
                 }).toString();
     }
-
 }

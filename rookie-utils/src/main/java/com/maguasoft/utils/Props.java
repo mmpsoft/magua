@@ -1,5 +1,8 @@
 package com.maguasoft.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -9,6 +12,8 @@ import java.util.Properties;
 
 public class Props {
 
+    public static final Logger log = LoggerFactory.getLogger(Props.class);
+
     public static Properties getProps(String path) {
         ClassLoader classLoader = Props.class.getClassLoader();
         try (InputStream inputStream = classLoader.getResourceAsStream(path)) {
@@ -16,7 +21,7 @@ public class Props {
             properties.load(inputStream);
             return properties;
         } catch (Exception e) {
-            System.out.printf("File <%s> not found.", path);
+            log.error("File {} not found.", path);
             e.printStackTrace();
         }
 
@@ -47,9 +52,14 @@ public class Props {
                 String methodName = NameGenerator.getSetterMethodName(cleanupPrefixIf);
                 Method method = methods.get(methodName);
 
-                // invoke
-                method.setAccessible(true);
-                method.invoke(beanProps, props.get(key));
+                if (Objects.nonNull(method)) {
+                    // invoke
+                    method.setAccessible(true);
+                    method.invoke(beanProps, props.get(key));
+                } else {
+                    // Warning
+                    log.warn("Method {} not found on class {}", methodName, clazz);
+                }
             }
 
             return beanProps;

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public interface Dialect {
+
     String PREFIX = "database";
     String DATABASE_URI = String.format("%s.%s", PREFIX, "uri");
     String DATABASE_NAME = String.format("%s.%s", PREFIX, "name");

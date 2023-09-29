@@ -16,13 +16,13 @@ public class NameGenerator {
         Function<String, String> nameWrap = name -> String.format("%s%s",
                 String.valueOf(name.charAt(0)).toUpperCase(),
                 name.substring(1).toLowerCase());
-        if (!Strings.contains(columnName, Reflects.SETTER_METHOD_PREFIX)) {
+        if (!Strings.contains(columnName, COLUMN_NAME_SPLIT_CHAR)) {
             // xxx => setXxx
             return nameWrap.apply(columnName);
         }
 
         // (xxx_xxx or xxx-xxx) => setXxx
-        return Arrays.stream(Strings.split(columnName, Reflects.SETTER_METHOD_PREFIX))
+        return Arrays.stream(Strings.split(columnName, COLUMN_NAME_SPLIT_CHAR))
                 .reduce("", (r, c) -> String.format("%s%s", r, nameWrap.apply(c)));
     }
 

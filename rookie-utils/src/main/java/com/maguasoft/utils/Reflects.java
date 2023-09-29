@@ -13,7 +13,7 @@ public class Reflects {
     public static final String SETTER_METHOD_PREFIX = "set";
     // Bean getXXX
     public static final String GETTER_METHOD_PREFIX = "get";
-    public static final String BEAN_METHOD_PREFIX = String.format("%s%s%s", SETTER_METHOD_PREFIX, Strings.OR_REGEX, GETTER_METHOD_PREFIX);
+    public static final String BEAN_METHOD_PREFIX = String.format("%s|%s", SETTER_METHOD_PREFIX, GETTER_METHOD_PREFIX);
 
     public static Map<String, Method> getMethods(Class<?> clazz, Predicate<String> filter) {
         if (Objects.isNull(clazz)) {
@@ -26,6 +26,8 @@ public class Reflects {
     }
 
     public static Map<String, Method> getBeanMethods(Class<?> clazz) {
-        return getMethods(clazz, m -> Strings.startsWith(m, BEAN_METHOD_PREFIX));
+        return getMethods(clazz, m -> {
+            return Strings.startsWith(m, BEAN_METHOD_PREFIX);
+        });
     }
 }

@@ -1,6 +1,8 @@
 package com.maguasoft.jdbc.support;
 
 import com.maguasoft.jdbc.Dialect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,6 +11,8 @@ import java.util.Objects;
 import java.util.Properties;
 
 public class DefaultDialect implements Dialect {
+
+    private static final Logger log = LoggerFactory.getLogger(DefaultDialect.class);
 
     @Override
     public Connection getConnection(Properties args) throws SQLException {
@@ -24,6 +28,7 @@ public class DefaultDialect implements Dialect {
 
     @Override
     public Connection getConnection(String uri, String name, String password) throws SQLException {
+        log.info("Database {}, {}, {}", uri, name, password);
         return DriverManager.getConnection(uri, name, password);
     }
 }

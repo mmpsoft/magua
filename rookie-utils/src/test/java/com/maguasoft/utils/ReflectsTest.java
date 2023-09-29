@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-public class ReflectsTestBean {
+public class ReflectsTest {
 
     @Test
     public void testGetMethods() {
@@ -19,5 +19,9 @@ public class ReflectsTestBean {
     public void testGetBeanMethods() {
         Map<String, Method> methods = Reflects.getBeanMethods(UserBean.class);
         Assert.assertFalse(methods.isEmpty());
+        boolean isSetter = methods.keySet().stream().anyMatch(m -> Strings.startsWith(m, Reflects.SETTER_METHOD_PREFIX));
+        boolean isGetter = methods.keySet().stream().anyMatch(m -> Strings.startsWith(m, Reflects.GETTER_METHOD_PREFIX));
+        Assert.assertTrue(isSetter);
+        Assert.assertTrue(isGetter);
     }
 }

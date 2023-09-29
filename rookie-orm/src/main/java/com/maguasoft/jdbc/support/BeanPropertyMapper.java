@@ -4,6 +4,8 @@ import com.maguasoft.jdbc.RowMapper;
 import com.maguasoft.jdbc.TypeConverter;
 import com.maguasoft.utils.NameGenerator;
 import com.maguasoft.utils.Reflects;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
 import java.sql.ResultSet;
@@ -12,6 +14,8 @@ import java.util.Map;
 import java.util.Objects;
 
 public class BeanPropertyMapper<T> implements RowMapper<T> {
+
+    public static final Logger log = LoggerFactory.getLogger(BeanPropertyMapper.class);
 
     private final Class<T> clazz;
 

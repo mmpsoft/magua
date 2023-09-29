@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import java.util.Properties;
 
-public class PropsTestBean {
+public class PropsTest {
 
     String defaultPath = "./test.properties";
 

@@ -5,6 +5,8 @@ import com.maguasoft.jdbc.support.entity.User;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -12,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 public class SupportDaoImplTest {
+
+    public static final Logger log = LoggerFactory.getLogger(SupportDaoImplTest.class);
 
     SupportDao supportDao = new SupportDaoImpl();
 
@@ -38,12 +42,12 @@ public class SupportDaoImplTest {
         List<User> list1 = supportDao.executeSql("select * from `user` where id = ?;", queryArgs);
         Assert.assertNotNull(list1);
         Assert.assertEquals(list1.size(), 1);
-        System.out.println(Arrays.toString(list1.toArray(new User[]{})));
+        log.info(Arrays.toString(list1.toArray(new User[]{})));
 
         List<User> list2 = supportDao.executeSql("select * from `user`;", null, User.class);
         Assert.assertNotNull(list2);
         Assert.assertEquals(list2.size(), 3);
-        System.out.println(Arrays.toString(list2.toArray(new User[]{})));
+        log.info(Arrays.toString(list2.toArray(new User[]{})));
 
         Map<Integer, Object> argsOfQuery = new HashMap<>();
         argsOfQuery.put(1, 1);
@@ -51,7 +55,7 @@ public class SupportDaoImplTest {
         List<User> list3 = supportDao.executeSql("select * from `user` where id = ?;", argsOfQuery, new BeanPropertyMapper<>(User.class));
         Assert.assertNotNull(list3);
         Assert.assertEquals(list3.size(), 1);
-        System.out.println(Arrays.toString(list3.toArray(new User[]{})));
+        log.info(Arrays.toString(list3.toArray(new User[]{})));
     }
 
     @Test
