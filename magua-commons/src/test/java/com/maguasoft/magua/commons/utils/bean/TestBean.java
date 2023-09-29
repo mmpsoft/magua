@@ -1,5 +1,8 @@
 package com.maguasoft.magua.commons.utils.bean;
 
+import com.maguasoft.magua.commons.io.Conf;
+
+@Conf(prefix = "database")
 public class TestBean {
     private String uri;
     private String name;

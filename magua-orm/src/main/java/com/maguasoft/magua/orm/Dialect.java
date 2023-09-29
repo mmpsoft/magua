@@ -49,6 +49,6 @@ public interface Dialect {
      * @return
      */
     default Connection getConnection() throws SQLException {
-        return getConnection(Props.getBeanProps(DEFAULT_DATABASE_CONF, ConfigProps.class, DATABASE_CONF_PREFIX));
+        return getConnection(Props.getBeanProps(DEFAULT_DATABASE_CONF, ConfigProps.class));
     }
 }

@@ -29,8 +29,20 @@ public class PropsTest {
     }
 
     @Test
-    public void testGetBeanProps() {
+    public void testGetBeanProps1() {
         TestBean beanProps = Props.getBeanProps(defaultPath, TestBean.class, "database");
+        System.out.println(beanProps);
+        Assert.assertNotNull(beanProps);
+        Assert.assertNotNull(beanProps.getUri());
+        Assert.assertNotNull(beanProps.getName());
+        Assert.assertNotNull(beanProps.getPassword());
+        Assert.assertNotNull(beanProps.getDialect());
+        Assert.assertNotNull(beanProps.getEntityPackage());
+    }
+
+    @Test
+    public void testGetBeanProps2() {
+        TestBean beanProps = Props.getBeanProps(defaultPath, TestBean.class);
         System.out.println(beanProps);
         Assert.assertNotNull(beanProps);
         Assert.assertNotNull(beanProps.getUri());

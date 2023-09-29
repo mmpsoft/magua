@@ -1,5 +1,9 @@
 package com.maguasoft.magua.orm.support;
 
+import com.maguasoft.magua.commons.io.Conf;
+import com.maguasoft.magua.orm.Dialect;
+
+@Conf(prefix = Dialect.DATABASE_CONF_PREFIX)
 public class ConfigProps {
     private String uri;
     private String name;

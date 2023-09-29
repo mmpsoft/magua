@@ -94,7 +94,7 @@ public class SupportDaoImpl implements SupportDao {
             log.debug("Use {} dialect connected", clazz);
 
             return (Dialect) clazz.newInstance();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

@@ -2,6 +2,7 @@ package com.maguasoft.magua.commons.io;
 
 import com.maguasoft.magua.commons.reflect.Reflects;
 import com.maguasoft.magua.commons.text.NameGenerator;
+import com.maguasoft.magua.commons.text.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,14 +37,17 @@ public class Props {
                 .orElse(null);
     }
 
-    public static <T> T getBeanProps(String path, Class<T> clazz, String... prefix) {
+    public static <T> T getBeanProps(String path, Class<T> clazz) {
+        return getBeanProps(path, clazz, null);
+    }
+
+    public static <T> T getBeanProps(String path, Class<T> clazz, String prefix) {
         Properties props = getProps(path);
         if (Objects.isNull(props)) {
             throw new IllegalArgumentException();
         }
 
-        String prefixIf = (Objects.nonNull(prefix) && prefix.length > 0)
-                ? String.format("%s.", prefix[0]) : "";
+        String prefixIf = getConfKeyPrefix(clazz, prefix);
 
         try {
             T beanProps = clazz.newInstance();
@@ -68,5 +72,17 @@ public class Props {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private static String getConfKeyPrefix(Class<?> clazz, String prefix) {
+        String prefixIf = Strings.isNotBlank(prefix) ? String.format("%s.", prefix) : "";
+        if (Strings.isNotBlank(prefixIf)) {
+            return prefixIf;
+        }
+
+        return Optional.ofNullable(clazz.getAnnotation(Conf.class))
+                .map(Conf::prefix)
+                .map(v -> String.format("%s.", v))
+                .orElse("");
     }
 }
