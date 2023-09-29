@@ -1,6 +1,6 @@
-package com.maguasoft.jdbc.support;
+package com.maguasoft.utils.bean;
 
-public class ConfigProps {
+public class TestBean {
     private String uri;
     private String name;
     private String password;

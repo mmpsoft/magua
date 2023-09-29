@@ -1,6 +1,6 @@
-package com.maguasoft.jdbc.support.entity;
+package com.maguasoft.utils.bean;
 
-public class User {
+public class UserBean {
 
     private Integer id;
     private String name;

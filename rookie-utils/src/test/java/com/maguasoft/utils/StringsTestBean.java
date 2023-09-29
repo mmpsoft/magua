@@ -1,10 +1,9 @@
 package com.maguasoft.utils;
 
-import com.maguasoft.jdbc.RowMapper;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class StringsTest {
+public class StringsTestBean {
 
     @Test
     public void testIsEmpty() {
@@ -73,7 +72,7 @@ public class StringsTest {
 
     @Test
     public void testSplit() {
-        Assert.assertTrue(Strings.split("column_Name", RowMapper.COLUMN_NAME_SPLIT_CHAR).length > 1);
-        Assert.assertTrue(Strings.split("column-Name", RowMapper.COLUMN_NAME_SPLIT_CHAR).length > 1);
+        Assert.assertTrue(Strings.split("column_Name", NameGenerator.COLUMN_NAME_SPLIT_CHAR).length > 1);
+        Assert.assertTrue(Strings.split("column-Name", NameGenerator.COLUMN_NAME_SPLIT_CHAR).length > 1);
     }
 }
