@@ -28,7 +28,7 @@ public class DefaultDialect implements Dialect {
 
     @Override
     public Connection getConnection(String uri, String name, String password) throws SQLException {
-        log.info("Database {}, {}, {}", uri, name, password);
+        log.debug("Database {}, {}, {}", uri, name, password);
         return DriverManager.getConnection(uri, name, password);
     }
 }

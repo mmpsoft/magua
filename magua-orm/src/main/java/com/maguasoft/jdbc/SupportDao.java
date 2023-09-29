@@ -12,7 +12,7 @@ public interface SupportDao {
      * @param sql
      * @return
      */
-    int executeSql(String sql);
+    <T> T executeSql(String sql);
 
     /**
      * Execute normal SQL

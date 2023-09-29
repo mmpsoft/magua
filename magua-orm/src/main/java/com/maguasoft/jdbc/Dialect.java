@@ -15,7 +15,7 @@ public interface Dialect {
     String DATABASE_PASSWORD = String.format("%s.%s", PREFIX, "password");
     String DATABASE_DIALECT = String.format("%s.%s", PREFIX, "dialect");
     String DATABASE_ENTITY_PACKAGE = String.format("%s.%s", PREFIX, "entity-package");
-    String DEFAULT_PATH = "database.properties";
+    String DEFAULT_PATH = "./database.properties";
 
     /**
      * 获取数据库连接

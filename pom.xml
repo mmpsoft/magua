@@ -16,6 +16,7 @@
     <module>magua-aop</module>
     <module>magua-orm</module>
     <module>magua-commons</module>
+      <module>magua-demo</module>
   </modules>
 
   <properties>
@@ -50,12 +51,14 @@
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
         <version>${slf4j.api.version}</version>
+        <scope>provided</scope>
       </dependency>
       <!-- log4j2 -->
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-slf4j2-impl</artifactId>
         <version>${log4j.slf4j2.version}</version>
+        <scope>provided</scope>
       </dependency>
       <!-- sqlite -->
       <dependency>

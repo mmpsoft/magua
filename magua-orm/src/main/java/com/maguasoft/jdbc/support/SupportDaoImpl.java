@@ -19,7 +19,7 @@ public class SupportDaoImpl implements SupportDao {
     public static final Logger log = LoggerFactory.getLogger(SupportDaoImpl.class);
 
     @Override
-    public int executeSql(String sql) {
+    public <T> T executeSql(String sql) {
         return executeSql(sql, null);
     }
 
@@ -91,7 +91,7 @@ public class SupportDaoImpl implements SupportDao {
 
         try {
             Class<?> clazz = Class.forName(dialectClazz);
-            log.info("Use {} dialect connected", clazz);
+            log.debug("Use {} dialect connected", clazz);
 
             return (Dialect) clazz.newInstance();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
