@@ -1,16 +1,17 @@
 package com.maguasoft.magua.orm;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class DeleteDemo extends AbstractDemo {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         DeleteDemo demo = new DeleteDemo();
         demo.delete();
     }
 
-    public void delete() {
+    public void delete() throws SQLException {
         int deleteCount1 = getSupportDao().executeSql("delete from `employee` where id = 1");
         log.info("deleteCount1 -> {}", deleteCount1);
 

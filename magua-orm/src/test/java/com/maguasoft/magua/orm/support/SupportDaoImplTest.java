@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +21,7 @@ public class SupportDaoImplTest {
     SupportDao supportDao = new SupportDaoImpl();
 
     @Before
-    public void before() {
+    public void before() throws SQLException {
         supportDao.executeSql("drop table if exists `user`");
         supportDao.executeSql("create table `user` (id int, name varchar(20), nick_name varchar(20))");
 
@@ -35,7 +36,7 @@ public class SupportDaoImplTest {
     }
 
     @Test
-    public void testQuerySql() {
+    public void testQuerySql() throws SQLException {
         Map<Integer, Object> queryArgs = new HashMap<>();
         queryArgs.put(1, 1);
 
@@ -59,7 +60,7 @@ public class SupportDaoImplTest {
     }
 
     @Test
-    public void testUpdateSql() {
+    public void testUpdateSql() throws SQLException {
         Map<Integer, Object> argsOfUpdate = new HashMap<>();
         argsOfUpdate.put(1, "王五");
         argsOfUpdate.put(2, "狗蛋");
@@ -70,7 +71,7 @@ public class SupportDaoImplTest {
     }
 
     @Test
-    public void testInsertSql() {
+    public void testInsertSql() throws SQLException {
         Map<Integer, Object> args = new HashMap<>();
         args.put(1, 11);
         args.put(2, "lisi");
@@ -81,11 +82,17 @@ public class SupportDaoImplTest {
     }
 
     @Test
-    public void testDeleteSql() {
+    public void testDeleteSql() throws SQLException {
         Map<Integer, Object> args = new HashMap<>();
         args.put(1, 1);
         Integer delete = supportDao.executeSql("delete from `user` where id = ?;", args);
         System.out.printf("delete -> %s \n", delete);
         Assert.assertTrue(delete > 0);
+    }
+
+    @Test(expected = SQLException.class)
+    public void testFailure() throws SQLException {
+        // 异常测试
+        supportDao.executeSql("select * from `user` where;");
     }
 }

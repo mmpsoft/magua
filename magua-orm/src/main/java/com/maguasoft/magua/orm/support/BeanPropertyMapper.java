@@ -20,7 +20,7 @@ public class BeanPropertyMapper<T> implements RowMapper<T> {
     private final Class<T> clazz;
 
     // TODO implements
-    private TypeConverter typeConverter = new DefaultTypeConverter();
+    private final TypeConverter typeConverter = new DefaultTypeConverter();
 
     public BeanPropertyMapper(Class<T> clazz) {
         if (Objects.isNull(clazz)) {

@@ -13,7 +13,7 @@ public abstract class AbstractDemo {
 
     protected static final Logger log = LoggerFactory.getLogger(AbstractDemo.class);
 
-    private static SupportDao supportDao = new SupportDaoImpl();
+    private static final SupportDao supportDao = new SupportDaoImpl();
 
     public AbstractDemo() {
         initialDemoSql();
@@ -24,7 +24,11 @@ public abstract class AbstractDemo {
         try (InputStream inputStream = classLoader.getResourceAsStream("./demo.sql");
              Reader reader = new InputStreamReader(inputStream);
              BufferedReader buffReader = new BufferedReader(reader)) {
-            buffReader.lines().forEach(sql -> getSupportDao().executeSql(sql));
+            while (buffReader.ready()) {
+                String sql = buffReader.readLine();
+                getSupportDao().executeSql(sql);
+            }
+
             log.info("Initialed sql execute successful");
         } catch (Exception e) {
             e.printStackTrace();

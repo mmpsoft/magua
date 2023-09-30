@@ -3,6 +3,7 @@ package com.maguasoft.magua.orm;
 import com.maguasoft.magua.orm.support.BeanPropertyMapper;
 import com.maguasoft.magua.orm.entity.Employee;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -10,12 +11,12 @@ import java.util.Map;
 
 public class QueryDemo extends AbstractDemo {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         QueryDemo demo = new QueryDemo();
         demo.query();
     }
 
-    public void query() {
+    public void query() throws SQLException {
         List<Employee> list1 = getSupportDao().executeSql("select * from employee");
         log.info("list1 -> {}", Arrays.toString(list1.toArray()));
 
